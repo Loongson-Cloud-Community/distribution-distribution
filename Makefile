@@ -7,6 +7,7 @@ REVISION=$(shell git rev-parse HEAD)$(shell if ! git diff --no-ext-diff --quiet 
 
 
 PKG=github.com/docker/distribution
+IMAGE?=registry-dev
 
 # Project packages.
 PACKAGES=$(shell go list -tags "${BUILDTAGS}" ./... | grep -v /vendor/)
@@ -96,6 +97,9 @@ binaries: $(BINARIES) ## build binaries
 build:
 	@echo "$(WHALE) $@"
 	@go build ${GO_GCFLAGS} ${GO_BUILD_FLAGS} ${GO_LDFLAGS} ${GO_TAGS} $(PACKAGES)
+
+image:
+	docker build -t ${IMAGE} .
 
 clean: ## clean up binaries
 	@echo "$(WHALE) $@"
