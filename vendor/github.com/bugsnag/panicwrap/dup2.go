@@ -1,4 +1,6 @@
+//go:build darwin || dragonfly || freebsd || (linux && (!arm64 && !loong64)) || netbsd || openbsd
 // +build darwin dragonfly freebsd linux,!arm64 netbsd openbsd
+
 
 package panicwrap
 
